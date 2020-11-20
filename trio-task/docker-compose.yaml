@@ -14,13 +14,15 @@ services:
       MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
   flask-app:
     build: ./flask-app
-    image: flask-app:latest
+    image: rfarq75/flaskapp
+    deploy:
+      replicas: 4
     ports:
     - target: 5000
       published: 5000
-      protocol: tcp
+      protocol: tcp 
     depends on:
-    - "my-sql"
+    - "mysql"
   nginx:
     image: nginx:latest
     ports:
